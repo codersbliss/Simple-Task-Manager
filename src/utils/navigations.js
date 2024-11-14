@@ -4,36 +4,30 @@ import TaskListIcon from '/task-svgrepo-com.svg';
 import BinIcon from '/bin-delete-remove-trash-svgrepo-com.svg';
 import PendingIcon from '/shifts-pending-svgrepo-com.svg';
 import UpcommingIcon from '/watch-square-minimalistic-svgrepo-com.svg';
-import completedicon from '/tick-success-svgrepo-com.svg';
+import CompletedIcon from '/complete-ok-accept-good-tick-svgrepo-com.svg';
 
 const navigationItems = [
-  // {
-  //   name: 'Plan',
-  //   icon: PlanIcon,
-  //   href: '#',
-  //   classNames: 'bg-yellow-200 text-yellow-900',
-  // },
   {
-    name: 'Today\'s',
-    icon: TaskListIcon,
+    name: 'DashBoard',
+    icon: PlanIcon,
     href: '/',
     classNames: 'text-gray-900 hover:bg-yellow-50',
   },
   {
-    name: 'Overdue Tasks',
+    name: 'Overdue',
     icon: PendingIcon,
     href: '/overdue',
     classNames: 'text-gray-900 hover:bg-yellow-50',
   },
   {
-    name: 'Upcomming Tasks',
+    name: 'Upcomming',
     icon: UpcommingIcon,
     href: '/upcomming',
     classNames: 'text-gray-900 hover:bg-yellow-50',
   },
   {
-    name: 'completed Tasks',
-    icon: completedicon,
+    name: 'Completed',
+    icon: CompletedIcon,
     href: '/completed',
     classNames: 'text-gray-900 hover:bg-yellow-50',
   },

@@ -4,16 +4,11 @@ import OverdueTasks from './components/OverdueTasks';
 import UpcomingTasks from './components/UpcomingTasks';
 import Trash from './components/Trash';
 import TodayPlan from './components/TodayPlan';
-import { useEffect } from 'react';
-import { initializeDummyTask } from './utils/storage';
 import ThisWeekTasks from './components/ThisWeekTasks';
 import Archives from './components/Archives';
 import CompletedTasks from './components/CompletedTasks';
 
 const App = () => {
-  useEffect(() => {
-    initializeDummyTask();
-  }, [])
   return (
     <BrowserRouter>
       <Routes>

@@ -5,7 +5,7 @@ import { getTasks } from '../utils/storage';
 const ThisWeekTasks = () => {
     const [weeklyTasks, setWeeklyTasks] = useState([]);
 
-    useEffect(() => {
+    const refreshTasks = () => {
         const tasks = getTasks();
         const now = new Date();
 
@@ -21,12 +21,16 @@ const ThisWeekTasks = () => {
         });
 
         setWeeklyTasks(filteredTasks);
+    };
+
+    useEffect(() => {
+        refreshTasks();
     }, []);
 
     return (
         <div className="p-8 m-auto max-w-4xl h-screen bg-yellow-50 mt-6">
             {weeklyTasks.length > 0 ? (
-                <TaskList tasks={weeklyTasks} />
+                <TaskList tasks={weeklyTasks} refreshTasks={refreshTasks}/>
             ) : (
                 <p className="text-gray-500">No tasks due this week.</p>
             )}

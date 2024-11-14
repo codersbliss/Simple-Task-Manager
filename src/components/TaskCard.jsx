@@ -1,47 +1,48 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
-const TaskCard = ({ task, onDelete, onEdit, isTrash = false }) => {
-    const overdueClass = task.dueDate < new Date().toISOString() ? "text-red-500 font-semibold" : "text-yellow-600";
+const TaskCard = ({ task, onDelete, onEdit }) => {
+    const isOverdue = task.dueDate < new Date().toISOString();
+    const dueDateClass = isOverdue ? "text-red-600 font-bold" : "text-yellow-600 font-semibold";
+    const priorityClass = task.priority === "1" ? "bg-red-100 text-red-600" : 
+                          task.priority === "2" ? "bg-orange-100 text-orange-600" : 
+                          "bg-green-100 text-green-600";
 
     return (
-        <div className="bg-green-300 p-6 rounded-lg shadow-md border border-gray-300 hover:shadow-lg transition m-2">
-            <div className="flex justify-between items-center mb-2">
-                <div className="text-xl font-semibold text-gray-700">{task.title}</div>
-                <div className={`text-xs ${overdueClass}`}>
-                    {task.dueDate < new Date().toISOString() ? "Overdue" : "Due Soon"}
-                </div>
+        <div className="bg-violet-400 p-5 rounded-lg shadow-lg border border-black hover:shadow-2xl transition duration-200 ease-in-out m-3">
+            <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-semibold text-black">{task.title}</h3>
+                <span className={`text-xs ${dueDateClass}`}>
+                    {isOverdue ? "Overdue" : "Due Soon"}
+                </span>
             </div>
 
-            <p className="text-sm text-gray-600 mb-4">{task.description}</p>
+            <p className="text-sm text-black-600 mb-3">{task.description}</p>
 
-            <div className="flex justify-between items-center">
-                {/* Priority Indicator */}
-                <div className="flex items-center space-x-2">
-                    {task.priority === "1" && <span className="text-red-500 font-semibold">High Priority</span>}
-                    {task.priority === "2" && <span className="text-orange-500 font-semibold">Medium Priority</span>}
-                    {task.priority === "3" && <span className="text-green-500 font-semibold">Low Priority</span>}
+            <div className="flex justify-between items-center mt-3">
+                <div className={`px-2 py-1 rounded-full text-xs font-semibold ${priorityClass}`}>
+                    {task.priority === "1" && "High Priority"}
+                    {task.priority === "2" && "Medium Priority"}
+                    {task.priority === "3" && "Low Priority"}
                 </div>
 
-                {/* Due Date */}
-                <div className="text-xs text-gray-500">
+                <span className="text-xs text-black-500">
                     {task.dueDate && `Due ${formatDistanceToNow(new Date(task.dueDate), { addSuffix: true })}`}
-                </div>
+                </span>
             </div>
 
-            {/* Action Buttons */}
-            <div className="mt-4 flex space-x-3">
-                {!isTrash && (
-                    <button
-                        onClick={() => onEdit(task)}
-                        className="w-16 h-8 bg-indigo-500 text-white rounded hover:bg-indigo-600 flex items-center justify-center transition duration-200"
-                    >
-                        ✏️
-                    </button>
-                )}
+            <div className="flex justify-end space-x-3 mt-4">
+                <button
+                    onClick={() => onEdit(task)}
+                    className="w-10 h-10 bg-blue-500 text-white rounded-full hover:bg-blue-600 flex items-center justify-center"
+                    title="Edit Task"
+                >
+                    ✏️
+                </button>
                 <button
                     onClick={() => onDelete(task.id)}
-                    className="w-16 h-8 bg-red-500 text-white rounded hover:bg-red-600 flex items-center justify-center transition duration-200"
+                    className="w-10 h-10 bg-red-500 text-white rounded-full hover:bg-red-600 flex items-center justify-center"
+                    title="Delete Task"
                 >
                     🗑️
                 </button>

@@ -1,18 +1,42 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
+import { markDone } from '../utils/storage';
 
-const TodayTasks = ({ todayTasks }) => {
+const TodayTasks = ({ todayTasks, refreshTasks }) => {
+
     return (
         <>
             {todayTasks.length > 0 ? (
                 todayTasks
-                    .filter(task => task.status === 0)
-                    .sort((task1, task2) => Number(task1.priority) - Number(task2.priority))
+                    .sort((task1, task2) => {
+                        const dueDate1 = new Date(task1.dueDate);
+                        const dueDate2 = new Date(task2.dueDate);
+
+                        // Check if one task is overdue
+                        const isTask1Overdue = dueDate1 < new Date(); // If dueDate1 has passed
+                        const isTask2Overdue = dueDate2 < new Date(); // If dueDate2 has passed
+
+                        // If one task is overdue and the other is not, place the overdue task last
+                        if (isTask1Overdue && !isTask2Overdue) {
+                            return 1;
+                        }
+                        if (!isTask1Overdue && isTask2Overdue) {
+                            return -1;
+                        }
+
+                        // Otherwise, sort by deadline (ascending)
+                        if (dueDate1 !== dueDate2) {
+                            return dueDate1 - dueDate2; // Earlier deadline comes first
+                        }
+
+                        // If deadlines are the same, sort by priority (ascending)
+                        return Number(task1.priority) - Number(task2.priority); // Lower priority value means higher priority
+                    })
                     .map((task, index) => (
                         <div key={index} className="p-4 bg-white border rounded-xl text-gray-800 space-y-2 mb-4 shadow-md">
                             <div className="flex justify-between items-center">
                                 <div className="text-gray-400 text-xs">{task.title}</div>
-                                <div className="text-gray-400 text-xs">{new Date(task.dueDate).toDateString()}</div>
+                                <div className="text-blue-400 text-xs font-bold">{new Date(task.dueDate).toLocaleTimeString()}</div>
                             </div>
 
                             <a href="#" className="font-bold text-lg hover:text-yellow-800 hover:underline">
@@ -42,8 +66,22 @@ const TodayTasks = ({ todayTasks }) => {
                                 </div>
                             </div>
 
-                            <div className="text-gray-500 text-xs">
-                                Added {formatDistanceToNow(task.lastUpdate, { addSuffix: true })}
+                            <div className="text-gray-500 text-xs flex justify-between">
+                                <div>
+                                    Last update {formatDistanceToNow(task.lastUpdate, { addSuffix: true })}
+                                </div>
+                                {
+                                    task.status == 0 ?
+                                        <button
+                                            onClick={() => {
+                                                markDone(task.id);
+                                                refreshTasks();
+                                            }}
+                                            className="w-48 h-6 bg-green-500 text-white font-semibold rounded-full hover:bg-green-600">
+                                            Mark as Done
+                                        </button>
+                                        : ""
+                                }
                             </div>
 
                         </div>
