@@ -16,7 +16,7 @@ This task management application allows users to organize and manage their tasks
 
 1. *Clone the repository*:
    bash
-   git clone https://github.com/prashantj99/task-manager.git
+   git clone https://github.com/codersbliss/Simple-Task-Manager
 2. **Navigate to the project directory**:
    bash
    cd task-manager
