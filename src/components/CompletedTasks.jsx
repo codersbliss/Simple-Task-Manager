@@ -14,7 +14,7 @@ const CompletedTasks = () => {
     }, []);
 
     return (
-        <div className="p-8 m-auto max-w-4xl h-screen bg-yellow-50">
+        <div className="p-8 m-auto max-w-4xl h-screen bg-yellow-50 mt-10">
             <TaskList tasks={tasks} refreshTasks={refreshTasks}/>
         </div>
     );
