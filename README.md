@@ -23,7 +23,7 @@ This task management application allows users to organize and manage their tasks
 3. Install dependencies: Make sure you have Node.js and npm installed. Run:
    ```bash
    npm install
-4. **Run the application:
+4. Run the application:
    ```bash
    npm run dev
 ## Assumptions Made
