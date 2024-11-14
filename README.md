@@ -14,16 +14,16 @@ This task management application allows users to organize and manage their tasks
 
 ## Setup Instructions
 
-1. Clone the repository*:
+1. Clone the repository:
    ```bash
    git clone https://github.com/codersbliss/Simple-Task-Manager.git
-2. Navigate to the project directory**:
+2. Navigate to the project directory:
    ```bash
    cd task-manager
-3. Install dependencies: Make sure you have Node.js and npm installed. Run*:
+3. Install dependencies: Make sure you have Node.js and npm installed. Run:
    ```bash
    npm install
-4. **Run the application**:
+4. **Run the application:
    ```bash
    npm run dev
 ## Assumptions Made
