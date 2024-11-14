@@ -19,7 +19,7 @@ This task management application allows users to organize and manage their tasks
    git clone https://github.com/codersbliss/Simple-Task-Manager.git
 2. Navigate to the project directory:
    ```bash
-   cd task-manager
+   cd Simple-Task-Manager-main
 3. Install dependencies: Make sure you have Node.js and npm installed. Run:
    ```bash
    npm install
